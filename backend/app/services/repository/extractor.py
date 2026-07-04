@@ -2,6 +2,7 @@ import os
 import uuid
 import zipfile
 from app.services.repository.repository import analyze_repository
+from app.services.chunking.chunker import ChunkBuilder
 
 from fastapi import UploadFile
 
@@ -58,9 +59,19 @@ async def save_and_extract_zip(file: UploadFile):
 
     repository = analyze_repository(extract_location)
 
+    builder = ChunkBuilder()
+
+    chunks = builder.build_chunks(
+        repository_id=repo_id,
+        repository_root=extract_location,
+        analysis=repository["files"]
+    )
+
     return {
         "repository_id": repo_id,
         "tree": tree,
         "analysis": repository["files"],
-        "graph": repository["graph"]
+        "graph": repository["graph"],
+        "chunks": [chunk.model_dump() for chunk in chunks]
     }
+    
