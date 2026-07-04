@@ -1,5 +1,5 @@
 from fastapi import APIRouter, File, UploadFile
-from app.services.extractor import save_and_extract_zip
+from app.services.repository.extractor import save_and_extract_zip
 router = APIRouter(
     prefix = "/api",
     tags = ["Upload"]

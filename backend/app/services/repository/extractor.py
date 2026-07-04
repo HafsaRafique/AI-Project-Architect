@@ -1,6 +1,7 @@
 import os
 import uuid
 import zipfile
+from app.services.repository.repository import analyze_repository
 
 from fastapi import UploadFile
 
@@ -53,8 +54,13 @@ async def save_and_extract_zip(file: UploadFile):
         zip_ref.extractall(extract_location)
 
     tree = build_tree(extract_location)
+    
+
+    repository = analyze_repository(extract_location)
 
     return {
         "repository_id": repo_id,
-        "tree": tree
+        "tree": tree,
+        "analysis": repository["files"],
+        "graph": repository["graph"]
     }
