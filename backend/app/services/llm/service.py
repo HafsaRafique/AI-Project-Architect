@@ -2,6 +2,7 @@ from app.services.llm.huggingface import (
     HuggingFaceLLMProvider
 )
 import json
+import re
 
 class LLMService:
 
@@ -13,7 +14,21 @@ class LLMService:
 
         response = self.generate(prompt)
 
-        return json.loads(response)
+        print("RAW RESPONSE:")
+        print(response)
+
+        # Remove all markdown
+        response = re.sub(r"```(?:json)?", "", response, flags=re.IGNORECASE)
+
+        response = response.strip()
+
+        # Find first JSON object
+        match = re.search(r"\{[\s\S]*?\}", response)
+
+        if not match:
+            raise ValueError(f"No JSON found:\n{response}")
+
+        return json.loads(match.group(0))
 
 
     def generate(

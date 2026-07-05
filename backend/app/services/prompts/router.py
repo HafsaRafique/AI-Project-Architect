@@ -41,9 +41,9 @@ Return ONLY valid JSON.
 
 Example:
 
-{
+{{
     "agent":"architecture"
-}
+}}
 
 Question:
 
