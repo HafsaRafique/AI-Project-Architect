@@ -1,8 +1,8 @@
 from app.services.agents.base_agent import BaseAgent
-from app.services.prompts.chat import build_chat_prompt
+from app.services.prompts.architecture import build_architecture_prompt
 
 
-class RepositoryAgent(BaseAgent):
+class ArchitectureAgent(BaseAgent):
 
     def chat(
         self,
@@ -12,10 +12,11 @@ class RepositoryAgent(BaseAgent):
 
         chunks = self.retrieve(
             repository_id,
-            question
+            question,
+            limit=8
         )
 
-        prompt = build_chat_prompt(
+        prompt = build_architecture_prompt(
             question,
             chunks
         )
@@ -23,7 +24,7 @@ class RepositoryAgent(BaseAgent):
         answer = self.generate(prompt)
 
         return {
-            "agent": "repository",
+            "agent": "architecture",
             "answer": answer,
             "sources": [
                 {
