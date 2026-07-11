@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Runebound Chess</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="arena">
+
+  <header class="arena-header">
+    <h1 class="title">Runebound Chess</h1>
+    <p class="subtitle">Two champions. One board. A narrator that never sleeps.</p>
+  </header>
+
+  <div class="arena-body">
+
+    <section class="board-wrap">
+      <div class="board-frame">
+        <div id="board" class="board"></div>
+        <div id="effect-layer" class="effect-layer"></div>
+        <div id="game-over-overlay" class="game-over-overlay hidden">
+          <div class="game-over-card">
+            <div id="game-over-title" class="game-over-title">Checkmate</div>
+            <div id="game-over-detail" class="game-over-detail"></div>
+            <button id="game-over-new-btn" class="rune-button">New Battle</button>
+          </div>
+        </div>
+      </div>
+      <div class="board-hud">
+        <span id="turn-indicator" class="turn-indicator">White's turn</span>
+        <span id="status" class="status"></span>
+        <span id="thinking" class="thinking hidden">The narrator is weaving fate…</span>
+      </div>
+      <div class="board-controls">
+        <label class="persona-label" for="persona-select">Narrator</label>
+        <select id="persona-select" class="persona-select"></select>
+        <button id="new-game-btn" class="rune-button">New Battle</button>
+      </div>
+    </section>
+
+    <aside class="scroll-panel">
+      <div class="scroll-header">
+        <span>The Chronicle</span>
+        <span id="connection-dot" class="connection-dot" title="Checking narrator connection…"></span>
+      </div>
+      <div id="chronicle" class="chronicle" aria-live="polite">
+        <div class="chronicle-entry chronicle-empty">The armies take their places. Make the first move.</div>
+      </div>
+      <div id="model-note" class="model-note">
+        Checking narrator connection…
+      </div>
+    </aside>
+
+  </div>
+
+  <footer class="arena-footer">
+    A demo of LLM-in-the-loop application design — structured output validation,
+    retries with graceful fallback, and a small eval harness live behind this board.
+    See the project's README for the architecture writeup.
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

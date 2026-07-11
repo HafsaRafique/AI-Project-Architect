@@ -13,21 +13,24 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(EXTRACT_DIR, exist_ok=True)
 
 
-def build_tree(path):
+def build_tree(path, root):
     nodes = []
 
     for item in sorted(os.listdir(path)):
         full_path = os.path.join(path, item)
+        relative_path = os.path.relpath(full_path, root)
 
         if os.path.isdir(full_path):
             nodes.append({
                 "name": item,
                 "type": "folder",
-                "children": build_tree(full_path)
+                "path": relative_path,
+                "children": build_tree(full_path, root)
             })
         else:
             nodes.append({
                 "name": item,
+                "path": relative_path,
                 "type": "file"
             })
 
@@ -54,7 +57,7 @@ async def save_and_extract_zip(file: UploadFile):
     with zipfile.ZipFile(zip_location) as zip_ref:
         zip_ref.extractall(extract_location)
 
-    tree = build_tree(extract_location)
+    tree = build_tree(extract_location, extract_location)
     
 
     repository = analyze_repository(extract_location)
