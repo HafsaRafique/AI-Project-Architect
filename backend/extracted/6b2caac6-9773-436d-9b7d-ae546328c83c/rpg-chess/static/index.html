@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Runebound Chess</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="arena">
+
+  <header class="arena-header">
+    <h1 class="title">Runebound Chess</h1>
+    <p class="subtitle">Two champions. One board. A narrator that never sleeps.</p>
+  </header>
+
+  <div class="arena-body">
+
+    <section class="board-wrap">
+      <div class="board-frame">
+        <div id="board" class="board"></div>
+        <div id="effect-layer" class="effect-layer"></div>
+      </div>
+      <div class="board-hud">
+        <span id="turn-indicator" class="turn-indicator">White's turn</span>
+        <span id="status" class="status"></span>
+        <button id="new-game-btn" class="rune-button">New Battle</button>
+      </div>
+    </section>
+
+    <aside class="scroll-panel">
+      <div class="scroll-header">The Chronicle</div>
+      <div id="narration" class="narration">The armies take their places. Make the first move.</div>
+      <div class="model-note">
+        Narrated live by a self-hosted LLM running on your own machine via
+        <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>.
+        No cloud, no API key — the model is the storyteller for every move.
+      </div>
+    </aside>
+
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

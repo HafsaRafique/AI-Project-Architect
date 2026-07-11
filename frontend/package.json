@@ -16,7 +16,8 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-markdown": "^10.1.0",
-    "react-resizable-panels": "^4.12.1"
+    "react-resizable-panels": "^4.12.1",
+    "reactflow": "^11.11.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

@@ -21,7 +21,10 @@ class RepositoryAgent(BaseAgent):
         )
 
         answer = self.generate(prompt)
+        print("Retrieved chunks:", len(chunks))
 
+        for chunk in chunks:
+            print(chunk.payload["path"])
         return {
             "agent": "repository",
             "answer": answer,
@@ -33,4 +36,5 @@ class RepositoryAgent(BaseAgent):
                 }
                 for chunk in chunks
             ]
+            
         }

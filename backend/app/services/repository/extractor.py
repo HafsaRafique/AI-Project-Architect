@@ -5,6 +5,11 @@ from app.services.repository.repository import analyze_repository
 from app.services.chunking.chunker import ChunkBuilder
 
 from fastapi import UploadFile
+from app.services.embeddings.service import EmbeddingService
+from app.services.vectorstore.qdrant import QdrantService
+
+embedder = EmbeddingService()
+qdrant = QdrantService()
 
 UPLOAD_DIR = "uploads"
 EXTRACT_DIR = "extracted"
@@ -70,6 +75,30 @@ async def save_and_extract_zip(file: UploadFile):
         analysis=repository["files"]
     )
 
+    BATCH_SIZE = 25
+
+    print(f"Total chunks: {len(chunks)}")
+
+    for i in range(0, len(chunks), BATCH_SIZE):
+
+            batch = chunks[i:i + BATCH_SIZE]
+
+            print(
+                f"Embedding batch {i//BATCH_SIZE + 1} "
+                f"({len(batch)} chunks)"
+            )
+
+            embedded_batch = embedder.embed_chunks(batch)
+
+            print("Uploading batch to Qdrant...")
+
+            qdrant.upsert_chunks(embedded_batch)
+
+            print(
+                f"Indexed {min(i + BATCH_SIZE, len(chunks))}"
+                f"/"
+                f"{len(chunks)} chunks"
+            )
     return {
         "repository_id": repo_id,
         "tree": tree,
