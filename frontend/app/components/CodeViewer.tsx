@@ -1,5 +1,6 @@
 "use client";
 
+import Editor from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 import api from "../../lib/api";
 import { useRepository } from "../context/RepositoryContext";
@@ -15,8 +16,7 @@ export default function CodeViewer() {
 
     useEffect(() => {
 
-        if (!repository || !selectedFile)
-            return;
+        if (!repository || !selectedFile) return;
 
         api.get(
             `/api/file/${repository.repository_id}`,
@@ -25,25 +25,26 @@ export default function CodeViewer() {
                     path: selectedFile
                 }
             }
-        )
-        .then(res => setCode(res.data.content));
+        ).then(res => setCode(res.data.content));
 
-    }, [
-        repository,
-        selectedFile
-    ]);
+    }, [repository, selectedFile]);
 
     return (
 
-        <pre className="h-full overflow-auto p-6 text-sm">
-
-            <code>
-
-                {code}
-
-            </code>
-
-        </pre>
+        <Editor
+            height="100%"
+            theme="vs-dark"
+            value={code}
+            language="python"
+            options={{
+                readOnly: true,
+                minimap: {
+                    enabled: false
+                },
+                fontSize: 14,
+                scrollBeyondLastLine: false
+            }}
+        />
 
     );
 
