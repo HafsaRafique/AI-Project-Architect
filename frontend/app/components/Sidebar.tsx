@@ -2,6 +2,8 @@
 
 import { useRepository } from "../context/RepositoryContext";
 
+import RepositoryTree from "./RepositoryTree";
+
 export default function Sidebar() {
 
     const { repository } = useRepository();
@@ -14,11 +16,7 @@ export default function Sidebar() {
                 Repository
             </h2>
 
-            <pre className="mt-4 text-xs overflow-auto">
-
-                {JSON.stringify(repository, null, 2)}
-
-            </pre>
+            <RepositoryTree/>
 
         </div>
 

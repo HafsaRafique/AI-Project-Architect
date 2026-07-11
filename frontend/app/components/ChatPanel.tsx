@@ -1,8 +1,15 @@
-export default function ChatPanel(){
-    return(
+import CodeViewer from "./CodeViewer";
 
-        <div className="p-6">
-            Chat
+export default function ChatPanel() {
+
+    return (
+
+        <div className="h-full">
+
+            <CodeViewer />
+
         </div>
+
     );
+
 }
