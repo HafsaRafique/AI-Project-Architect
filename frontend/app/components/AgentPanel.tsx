@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRepository } from "../context/RepositoryContext";
 import api from "../../lib/api";
 import ChatInput from "./ChatInput";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type Message = {
     role: "user" | "assistant";
@@ -16,6 +18,7 @@ export default function AgentPanel() {
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
+    const [pdfAvailable, setPdfAvailable] = useState(false);
 
     async function sendMessage(question: string) {
 
@@ -40,12 +43,18 @@ export default function AgentPanel() {
                     question: question,
                 }
             );
-
+            console.log(response.data);
+            if (response.data.agent === "documentation") {
+    setPdfAvailable(true);
+}
             setMessages(prev => [
                 ...prev,
                 {
                     role: "assistant",
-                    content: response.data.answer.answer,
+                    content:
+    typeof response.data.answer === "string"
+        ? response.data.answer
+        : response.data.answer.answer,
                 },
             ]);
 
@@ -84,7 +93,15 @@ export default function AgentPanel() {
                             }
                         >
 
-                            {message.content}
+                             {message.role === "user" ? (
+        message.content
+    ) : (
+        <Markdown
+            remarkPlugins={[remarkGfm]}
+        >
+            {message.content}
+        </Markdown>
+    )}
 
                         </div>
 
@@ -99,7 +116,22 @@ export default function AgentPanel() {
                 )}
 
             </div>
+                {pdfAvailable && (
+    <div className="border-t border-slate-800 p-3">
 
+        <button
+            onClick={() =>
+                window.open(
+                    `http://localhost:8000/api/chat/download/${repository?.repository_id}`
+                )
+            }
+            className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
+        >
+             Download Documentation PDF
+        </button>
+
+    </div>
+)}
             <ChatInput onSend={sendMessage} />
 
         </div>

@@ -13,9 +13,12 @@ import Sidebar from "./Sidebar";
 import CodeViewer from "./CodeViewer";
 import AgentPanel from "./AgentPanel";
 import GraphPanel from "./GraphPanel";
+import MetricsPanel from "./MetricsPanel";
 
 export default function Workspace() {
-  const [activeTab, setActiveTab] = useState<"graph" | "code">("graph");
+  const [activeTab, setActiveTab] = useState<
+    "graph" | "code" | "metrics"
+>("graph");
   console.log("Workspace rendered");
   console.log("Active tab:", activeTab);
   return (
@@ -72,18 +75,21 @@ export default function Workspace() {
                   Code
                 </button>
 
+                 
               </div>
 
              
               <div className="flex-1 overflow-hidden">
 
-                {activeTab === "graph" ? (
-                  <GraphPanel
-                    onOpenFile={() => setActiveTab("code")}
-                  />
-                ) : (
-                  <CodeViewer />
-                )}
+                {activeTab === "graph" && (
+    <GraphPanel onOpenFile={() => setActiveTab("code")} />
+)}
+
+{activeTab === "code" && (
+    <CodeViewer />
+)}
+
+
 
               </div>
 

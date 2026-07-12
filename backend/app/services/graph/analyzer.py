@@ -8,6 +8,14 @@ class GraphAnalyzer:
             "total_classes": 0,
             "total_modules": 0
         }
+        metrics = {
+            "average_functions_per_file": 0,
+            "average_classes_per_file": 0,
+            "largest_file": "",
+            "largest_function_count": 0,
+            "most_imported_file": "",
+            "largest_import_count": 0
+}
 
         files = {}
 
@@ -78,7 +86,37 @@ class GraphAnalyzer:
 
                 files[source]["imports"].append(target)
 
+
+
+                for file in files.values():
+
+                    function_count = len(file["functions"])
+                    class_count = len(file["classes"])
+                    import_count = len(file["imports"])
+
+                    if function_count > metrics["largest_function_count"]:
+
+                        metrics["largest_function_count"] = function_count
+                        metrics["largest_file"] = file["path"]
+
+                    if import_count > metrics["largest_import_count"]:
+
+                        metrics["largest_import_count"] = import_count
+                        metrics["most_imported_file"] = file["path"]
+
+                if summary["total_files"] > 0:
+
+                    metrics["average_functions_per_file"] = round(
+                        summary["total_functions"] / summary["total_files"],
+                        2
+                    )
+
+                    metrics["average_classes_per_file"] = round(
+                        summary["total_classes"] / summary["total_files"],
+                        2
+                    )
         return {
             "summary": summary,
-            "files": list(files.values())
+            "files": list(files.values()),
+             "metrics": metrics
         }

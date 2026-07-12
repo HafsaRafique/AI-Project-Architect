@@ -5,13 +5,16 @@ from app.services.prompts.review import build_review_prompt
 class ReviewAgent(BaseAgent):
 
     def answer(self, repository_id: str, question: str):
-
+        print("REVIEW AGENT STARTED")
         chunks = self.retrieve(
             repository_id,
             question,
-            limit=10
+            limit=1200
         )
-
+        print(
+            "RETRIEVED CHUNKS:",
+            len(chunks)
+        )
         context = "\n\n".join(
             chunk.payload["content"]
             for chunk in chunks
