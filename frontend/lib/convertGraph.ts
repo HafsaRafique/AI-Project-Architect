@@ -3,22 +3,25 @@ import { Node, Edge } from "reactflow";
 export function convertGraph(graph: any) {
 
     const nodes: Node[] = graph.nodes.map(
-        (node: any, index: number) => ({
+    (node: any, index: number) => ({
 
-            id: node.id,
+        id: node.id,
 
-            data: {
-                label: node.name
-            },
+       data: {
+    label: node.name ?? node.id,
+    type: node.type,
+    path: node.path
+},
 
-            position: {
-                x: (index % 5) * 250,
-                y: Math.floor(index / 5) * 120
-            },
+        position: {
+            x: (index % 5) * 250,
+            y: Math.floor(index / 5) * 120
+        },
 
-            type: "default"
-        })
-    );
+        type: "default"
+    })
+);
+    
 
     const edges: Edge[] = graph.edges.map(
         (edge: any, index: number) => ({

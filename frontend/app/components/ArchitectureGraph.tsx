@@ -12,14 +12,18 @@ import "reactflow/dist/style.css";
 const nodeTypes = Object.freeze({});
 const edgeTypes = Object.freeze({});
 
+import { Node, Edge } from "reactflow";
+
 type Props = {
-  nodes: any[];
-  edges: any[];
+  nodes: Node[];
+  edges: Edge[];
+  onNodeClick: (node: Node) => void;
 };
 
 export default function ArchitectureGraph({
   nodes,
   edges,
+   onNodeClick,
 }: Props) {
   return (
     <div className="w-full h-full">
@@ -28,7 +32,9 @@ export default function ArchitectureGraph({
         edges={edges}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
+       
         fitView
+         onNodeClick={(_, node) => onNodeClick(node)}
       >
         <Background />
         <Controls />

@@ -14,11 +14,13 @@ type RepositoryData = {
 };
 
 type RepositoryContextType = {
-    repository: RepositoryData | null;
-    setRepository: (repo:RepositoryData) => void;
+  repository: any;
+  setRepository: (repo: any) => void;
 
-    selectedFile: string | null;
-    setSelectedFile: (file: string | null) => void;
+  selectedFile: string | null;
+  setSelectedFile: React.Dispatch<
+    React.SetStateAction<string | null>
+  >;
 };
 
 const RepositoryContext = createContext<RepositoryContextType | undefined>(undefined);
@@ -28,6 +30,8 @@ export function RepositoryProvider({children}:{children: ReactNode})
 const [repository, setRepository] = useState<RepositoryData | null>(null);
 const [selectedFile, setSelectedFile] =
     useState<string | null>(null);
+
+
 return (
         <RepositoryContext.Provider value={{ repository, setRepository, selectedFile,
         setSelectedFile,}}>

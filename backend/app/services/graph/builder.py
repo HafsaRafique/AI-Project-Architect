@@ -19,7 +19,8 @@ class RepositoryGraph:
         self.graph.add_node(
             function_node,
             type="function",
-            name=function_name
+            name=function_name,
+             path=file_path
         )
 
         self.graph.add_edge(
@@ -35,7 +36,8 @@ class RepositoryGraph:
         self.graph.add_node(
             class_node,
             type="class",
-            name=class_name
+            name=class_name,
+             path=file_path
         )
 
         self.graph.add_edge(
@@ -48,7 +50,8 @@ class RepositoryGraph:
 
         self.graph.add_node(
             imported_module,
-            type="module"
+            type="module",
+             path=file_path
         )
 
         self.graph.add_edge(
