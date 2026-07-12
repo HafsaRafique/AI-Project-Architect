@@ -1,4 +1,5 @@
 import CodeViewer from "./CodeViewer";
+import GraphPanel from "./GraphPanel";
 
 export default function ChatPanel() {
 
@@ -6,7 +7,7 @@ export default function ChatPanel() {
 
         <div className="h-full">
 
-            <CodeViewer />
+            <GraphPanel />
 
         </div>
 

@@ -10,6 +10,7 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import CodeViewer from "./CodeViewer";
 import AgentPanel from "./AgentPanel";
+import GraphPanel from "./GraphPanel";
 
 export default function Workspace() {
   return (
@@ -36,7 +37,7 @@ export default function Workspace() {
             defaultSize={55}
             minSize={30}
           >
-            <CodeViewer />
+            <GraphPanel />
           </Panel>
 
           <Separator className="w-1 bg-slate-800 hover:bg-blue-500 cursor-col-resize transition-colors" />
