@@ -34,11 +34,7 @@ export default function GraphPanel({
         <ArchitectureGraph
     nodes={nodes}
     edges={edges}
-    onNodeClick={(node: any) => {
-
-        if (node.data.type !== "file")
-            return;
-
+    onNodeClick={(node) => {
         setSelectedFile(node.data.path);
         onOpenFile();
 

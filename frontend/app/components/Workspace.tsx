@@ -16,7 +16,8 @@ import GraphPanel from "./GraphPanel";
 
 export default function Workspace() {
   const [activeTab, setActiveTab] = useState<"graph" | "code">("graph");
-
+  console.log("Workspace rendered");
+  console.log("Active tab:", activeTab);
   return (
     <main className="h-screen flex flex-col bg-slate-950 text-white">
 

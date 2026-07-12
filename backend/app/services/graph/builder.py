@@ -9,8 +9,9 @@ class RepositoryGraph:
     def add_file(self, path):
         self.graph.add_node(
             path,
-            type="file"
-        )
+            type="file",
+            path=path
+    )
 
     def add_function(self, file_path, function_name):
 

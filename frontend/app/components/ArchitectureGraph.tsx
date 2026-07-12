@@ -7,12 +7,29 @@ import {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
+import FileNode from "./Graph/nodes/FileNode";
+import FunctionNode from "./Graph/nodes/FunctionNode";
+import ClassNode from "./Graph/nodes/ClassNode";
+import ModuleNode from "./Graph/nodes/ModuleNode";
 
 // Define once, outside the component
-const nodeTypes = Object.freeze({});
+const nodeTypes = {
+
+    file: FileNode,
+
+    function: FunctionNode,
+
+    class: ClassNode,
+
+    module: ModuleNode
+
+};
+
 const edgeTypes = Object.freeze({});
 
 import { Node, Edge } from "reactflow";
+
+
 
 type Props = {
   nodes: Node[];
@@ -34,7 +51,9 @@ export default function ArchitectureGraph({
         edgeTypes={edgeTypes}
        
         fitView
-         onNodeClick={(_, node) => onNodeClick(node)}
+        
+         onNodeClick={(_, node) => {console.log(node); onNodeClick(node)}}
+         
       >
         <Background />
         <Controls />

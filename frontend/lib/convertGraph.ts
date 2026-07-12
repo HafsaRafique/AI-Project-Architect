@@ -18,7 +18,7 @@ export function convertGraph(graph: any) {
             y: Math.floor(index / 5) * 120
         },
 
-        type: "default"
+        type: node.type
     })
 );
     

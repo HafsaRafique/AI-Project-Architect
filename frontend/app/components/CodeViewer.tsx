@@ -6,7 +6,7 @@ import api from "../../lib/api";
 import { useRepository } from "../context/RepositoryContext";
 
 export default function CodeViewer() {
-
+console.log("CodeViewer rendered");
     const {
         repository,
         selectedFile
@@ -16,18 +16,27 @@ export default function CodeViewer() {
 
     useEffect(() => {
 
-        if (!repository || !selectedFile) return;
+    console.log("Repository:", repository);
+    console.log("Selected file:", selectedFile);
 
-        api.get(
-            `/api/file/${repository.repository_id}`,
-            {
-                params: {
-                    path: selectedFile
-                }
+    if (!repository || !selectedFile) return;
+
+    api.get(
+        `/api/file/${repository.repository_id}`,
+        {
+            params: {
+                path: selectedFile
             }
-        ).then(res => setCode(res.data.content));
+        }
+    ).then(res => {
 
-    }, [repository, selectedFile]);
+        console.log("Response:", res.data);
+
+        setCode(res.data.content);
+
+    });
+
+}, [repository, selectedFile]);
 
     return (
 
