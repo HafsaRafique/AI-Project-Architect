@@ -19,6 +19,10 @@ export default function AgentPanel() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
     const [pdfAvailable, setPdfAvailable] = useState(false);
+    const clearChat = () => {
+    setMessages([]);
+    setPdfAvailable(false);
+};
     
     async function sendMessage(question: string) {
 
@@ -116,22 +120,29 @@ export default function AgentPanel() {
                 )}
 
             </div>
-                {pdfAvailable && (
-    <div className="border-t border-slate-800 p-3">
+            <div className="border-t border-slate-800 p-3 space-y-2">
 
+    {pdfAvailable && (
         <button
             onClick={() =>
                 window.open(
-                    `http://localhost:8000/api/chat/download/${repository?.repository_id}`
+                    `${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`
                 )
             }
             className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
         >
-             Download Documentation PDF
+            Download Documentation PDF
         </button>
+    )}
 
-    </div>
-)}
+    <button
+        onClick={clearChat}
+        className="w-full rounded bg-slate-700 px-4 py-2 font-medium text-white hover:bg-slate-600"
+    >
+        Clear Chat
+    </button>
+
+</div>
             <ChatInput onSend={sendMessage} />
 
         </div>
