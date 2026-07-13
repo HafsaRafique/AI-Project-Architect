@@ -30,6 +30,7 @@ export default function GraphPanel({
 
     }, [repository]);
 
+    
     return (
         <ArchitectureGraph
     nodes={nodes}
@@ -39,6 +40,7 @@ export default function GraphPanel({
         onOpenFile();
 
     }}
+    
 />
     );
 }

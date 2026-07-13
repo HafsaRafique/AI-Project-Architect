@@ -19,7 +19,7 @@ export default function AgentPanel() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [loading, setLoading] = useState(false);
     const [pdfAvailable, setPdfAvailable] = useState(false);
-
+    
     async function sendMessage(question: string) {
 
         if (!repository) return;

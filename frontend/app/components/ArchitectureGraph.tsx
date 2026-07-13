@@ -35,12 +35,14 @@ type Props = {
   nodes: Node[];
   edges: Edge[];
   onNodeClick: (node: Node) => void;
+  onNodeAnalyze?: (node: Node) => void;
 };
 
 export default function ArchitectureGraph({
   nodes,
   edges,
    onNodeClick,
+     onNodeAnalyze,
 }: Props) {
   return (
     <div className="w-full h-full">
@@ -52,7 +54,11 @@ export default function ArchitectureGraph({
        
         fitView
         
-         onNodeClick={(_, node) => {console.log(node); onNodeClick(node)}}
+         onNodeClick={(_, node) => {console.log(node); onNodeClick(node);  if (onNodeAnalyze) {
+        onNodeAnalyze(node);
+    }
+}}
+      
          
       >
         <Background />

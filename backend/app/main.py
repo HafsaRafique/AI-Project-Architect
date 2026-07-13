@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.upload import router as upload_router
 from app.api.chat import router as chat_router
 from app.api.file import router as file_router
+from app.api import graph
 
 app = FastAPI(
     title="CodeArchitect AI",
@@ -18,6 +19,7 @@ app.add_middleware(
 )
 
 app.include_router(upload_router)
+app.include_router(graph.router)
 
 @app.get("/")
 async def root():

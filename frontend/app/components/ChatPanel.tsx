@@ -7,7 +7,9 @@ export default function ChatPanel() {
 
         <div className="h-full">
 
-            <GraphPanel />
+            <GraphPanel  onOpenFile={() => {
+        console.log("open file");
+    }}/>
 
         </div>
 

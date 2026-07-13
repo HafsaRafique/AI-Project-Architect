@@ -1,5 +1,16 @@
 from fastapi import APIRouter, File, UploadFile
 from app.services.repository.extractor import save_and_extract_zip
+from fastapi import APIRouter
+from pydantic import BaseModel
+
+
+router = APIRouter()
+
+
+class URLRequest(BaseModel):
+
+    url:str
+
 router = APIRouter(
     prefix = "/api",
     tags = ["Upload"]
@@ -7,3 +18,4 @@ router = APIRouter(
 @router.post("upload/")
 async def upload_repository(file: UploadFile = File(...)):
     return await save_and_extract_zip(file)
+
