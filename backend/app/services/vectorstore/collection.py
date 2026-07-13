@@ -3,8 +3,8 @@ from qdrant_client.models import Distance
 from qdrant_client.models import VectorParams
 
 from app.core.config import (
-    QDRANT_HOST,
-    QDRANT_PORT,
+    QDRANT_URL,
+    QDRANT_API_KEY,
     COLLECTION_NAME
 )
 
@@ -14,8 +14,8 @@ class CollectionManager:
     def __init__(self):
 
         self.client = QdrantClient(
-            host=QDRANT_HOST,
-            port=QDRANT_PORT
+             url=QDRANT_URL,
+             api_key=QDRANT_API_KEY
         )
 
     def create_collection(
