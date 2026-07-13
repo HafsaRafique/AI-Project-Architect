@@ -5,8 +5,8 @@ from qdrant_client.models import FieldCondition
 from qdrant_client.models import MatchValue
 
 from app.core.config import (
-    QDRANT_HOST,
-    QDRANT_PORT,
+    QDRANT_URL,
+    QDRANT_API_KEY,
     COLLECTION_NAME
 )
 
@@ -16,9 +16,9 @@ class QdrantService:
     def __init__(self):
 
         self.client = QdrantClient(
-            host=QDRANT_HOST,
-            port=QDRANT_PORT
-        )
+        url=QDRANT_URL,
+        api_key=QDRANT_API_KEY
+)
     def search(
     self,
     vector,
