@@ -123,26 +123,33 @@ export default function AgentPanel() {
             <div className="border-t border-slate-800 p-3 space-y-2">
 
     {pdfAvailable && (
-        <button
-            onClick={() =>
-               const response = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`
-);
+       <button
+    onClick={async () => {
 
-const blob = await response.blob();
-const url = window.URL.createObjectURL(blob);
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`
+        );
 
-const link = document.createElement("a");
-link.href = url;
-link.download = "Repository_Documentation.pdf";
-link.click();
+        const blob = await response.blob();
 
-window.URL.revokeObjectURL(url);
-            }
-            className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
-        >
-            Download Documentation PDF
-        </button>
+        const url = window.URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "Repository_Documentation.pdf";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        window.URL.revokeObjectURL(url);
+
+    }}
+    className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
+>
+    Download Documentation PDF
+</button>
     )}
 
     <button
