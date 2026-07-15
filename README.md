@@ -54,7 +54,7 @@ Instead of manually exploring hundreds of files, Code Architect retrieves the mo
 
 ### AI Chat
 
-![Chat](images/chat.png)
+![Chat](images/ai_chat.png)
 
 
 ### Documentation PDF
