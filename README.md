@@ -254,7 +254,7 @@ npm run dev
 
 ---
 
-# 🔑 Environment Variables
+#  Environment Variables
 
 Backend
 
@@ -325,8 +325,4 @@ Code Architect brings all in one to provide repository-aware AI assistance:
 AI Engineer | Computer Vision | Generative AI
 
 
----
 
-# ⭐ If you found this project interesting
-
-Give it a ⭐ on GitHub!
