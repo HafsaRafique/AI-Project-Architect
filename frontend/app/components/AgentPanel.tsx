@@ -125,9 +125,19 @@ export default function AgentPanel() {
     {pdfAvailable && (
         <button
             onClick={() =>
-                window.open(
-                    `${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`
-                )
+               const response = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`
+);
+
+const blob = await response.blob();
+const url = window.URL.createObjectURL(blob);
+
+const link = document.createElement("a");
+link.href = url;
+link.download = "Repository_Documentation.pdf";
+link.click();
+
+window.URL.revokeObjectURL(url);
             }
             className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
         >
