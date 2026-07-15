@@ -123,13 +123,18 @@ export default function AgentPanel() {
             <div className="border-t border-slate-800 p-3 space-y-2">
 
     {pdfAvailable && (
-       <a
-    href={`${process.env.NEXT_PUBLIC_API_URL}/api/chat/download/${repository?.repository_id}`}
-    download
-    className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700 inline-block text-center"
+      <button
+    onClick={() => {
+        const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "");
+
+        window.open(
+            `${baseUrl}/api/chat/download/${repository?.repository_id}`
+        );
+    }}
+    className="w-full rounded bg-green-600 px-4 py-2 font-medium text-white hover:bg-green-700"
 >
     Download Documentation PDF
-</a>
+</button>
     )}
 
     <button
